@@ -14,5 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
+
+//Crear todas las rutas excepto la de show ya que no se usará
+Route::resource('tasks', 'TaskController')->except(['show']);

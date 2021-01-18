@@ -50183,6 +50183,7 @@ new Vue({
 
       var urlKeeps = '/tasks';
       axios.get(urlKeeps).then(function (response) {
+        //Cargar la variable keeps con todas las tareas
         _this.keeps = response.data;
       });
     },
@@ -50203,7 +50204,7 @@ new Vue({
 
         $('#create').modal('hide'); //Mensaje de feedback con el plugin JQuery toastr
 
-        toastr.success('Tarea creada correctamente, número: #' + response.data.id);
+        toastr.success("Tarea creada correctamente, n\xFAmero: #".concat(response.data.id));
       })["catch"](function (error) {
         //Controlar los errores
         _this2.errors = error.response.data;
@@ -50216,18 +50217,41 @@ new Vue({
 
       $('#edit').modal('show');
     },
-    updateKeep: function updateKeep(id) {},
-    deleteKeep: function deleteKeep(keep) {
+    updateKeep: function updateKeep(id) {
       var _this3 = this;
 
-      var urlKeeps = '/tasks/' + keep.id; //Elimina el registro
+      var urlKeeps = "/tasks/".concat(id); //Como se trata de un objeto simplemente se envía el atributo fillKeep
+
+      axios.put(urlKeeps, this.fillKeep).then(function (response) {
+        //Listar todas las tareas
+        _this3.getKeeps(); //Resetear las variables utilizadas
+
+
+        _this3.fillKeep = {
+          id: '',
+          keep: ''
+        };
+        _this3.errors = []; //Ocultar el modal de edición con JQuery
+
+        $('#edit').modal('hide'); //Mensaje de feedback con el plugin JQuery toastr
+
+        toastr.success("Tarea #".concat(id, " actualizada correctamente"));
+      })["catch"](function (error) {
+        //Tratamiento de errores
+        _this3.errors = error.response.data;
+      });
+    },
+    deleteKeep: function deleteKeep(keep) {
+      var _this4 = this;
+
+      var urlKeeps = "/tasks/".concat(keep.id); //Elimina el registro
 
       axios["delete"](urlKeeps).then(function (response) {
         //Lista nuevamente las tareas
-        _this3.getKeeps(); //Mensaje de feedback
+        _this4.getKeeps(); //Mensaje de feedback
 
 
-        toastr.success('Tarea #' + keep.id + ' eliminada correctamente');
+        toastr.success("Tarea #".concat(keep.id, " eliminada correctamente"));
       });
     }
   }

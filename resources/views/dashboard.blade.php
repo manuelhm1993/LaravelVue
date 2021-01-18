@@ -35,6 +35,7 @@
                                 <td width="10px">@{{ keep.id }}</td>
                                 <td>@{{ keep.keep }}</td>
                                 <td width="10px">
+                                    {{-- El modal se mostrará manualmente para pasar el keep por parámetro --}}
                                     <a href="#" class="btn btn-warning btn-sm" v-on:click.prevent="editKeep(keep)">
                                         Editar
                                     </a>

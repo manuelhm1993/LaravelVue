@@ -8,6 +8,7 @@ new Vue({
     data: {
         keeps: [],
         newKeep: '',
+        fillKeep: { id: '', keep: '' },
         errors: []
     },
     methods: {
@@ -16,18 +17,6 @@ new Vue({
 
             axios.get(urlKeeps).then(response => {
                 this.keeps = response.data;
-            });
-        },
-        deleteKeep: function (keep) {
-            let urlKeeps = '/tasks/' + keep.id;
-
-            //Elimina el registro
-            axios.delete(urlKeeps).then(response => {
-                //Lista nuevamente las tareas
-                this.getKeeps();
-                
-                //Mensaje de feedback
-                toastr.success('Tarea #' + keep.id + ' eliminada correctamente');
             });
         },
         storeKeep: function () {
@@ -51,6 +40,29 @@ new Vue({
             }).catch(error => {
                 //Controlar los errores
                 this.errors = error.response.data;
+            });
+        },
+        editKeep: function (keep) {
+            //Llena la variable fillKeep con la información del keep seleccionado
+            this.fillKeep.id   = keep.id;
+            this.fillKeep.keep = keep.keep;
+            
+            //Muestra el modal manualmente usando JQuery
+            $('#edit').modal('show');
+        },
+        updateKeep: function(id) {
+
+        },
+        deleteKeep: function (keep) {
+            let urlKeeps = '/tasks/' + keep.id;
+
+            //Elimina el registro
+            axios.delete(urlKeeps).then(response => {
+                //Lista nuevamente las tareas
+                this.getKeeps();
+                
+                //Mensaje de feedback
+                toastr.success('Tarea #' + keep.id + ' eliminada correctamente');
             });
         }
     }

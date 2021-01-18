@@ -8,7 +8,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                ...
+                <label for="keep">Rótulo</label>
+                <input type="text" name="keep" class="form-control" v-model="newKeep">
+                <span v-for="error in errors" v-text="error" class="text-danger"></span>
             </div>
             <div class="modal-footer">
                 <input type="submit" class="btn btn-primary" value="Crear">

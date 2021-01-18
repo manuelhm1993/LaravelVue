@@ -50081,7 +50081,9 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); //Se debe colocar el nombre de la variable para que sea accedida globalmente
+
+window.toastr = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -50127,8 +50129,6 @@ try {
   window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
-
-  __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
 } catch (e) {}
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -50183,9 +50183,14 @@ new Vue({
     deleteKeep: function deleteKeep(keep) {
       var _this2 = this;
 
-      var urlKeeps = '/tasks/' + keep.id;
+      var urlKeeps = '/tasks/' + keep.id; //Elimina el registro
+
       axios["delete"](urlKeeps).then(function (response) {
-        _this2.getKeeps();
+        //Lista nuevamente las tareas
+        _this2.getKeeps(); //Mensaje de feedback
+
+
+        toastr.success('Tarea #' + keep.id + ' eliminada correctamente');
       });
     }
   }

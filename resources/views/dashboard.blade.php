@@ -7,7 +7,8 @@
         </div>
     </div>
 
-    <div class="row">
+    {{-- Pueden existir múltiples zonas con componentes Vue en la misma vista o app --}}
+    <div id="crud" class="row">
         <div class="col-7">
             <div class="row">
                 <div class="col-12">

@@ -49666,7 +49666,23 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 //Utilidades y comportamientos propios de la aplicación
 new Vue({
-  el: '#main'
+  el: '#crud',
+  created: function created() {
+    this.getKeeps();
+  },
+  data: {
+    keeps: []
+  },
+  methods: {
+    getKeeps: function getKeeps() {
+      var _this = this;
+
+      var urlKeeps = '/tasks';
+      axios.get(urlKeeps).then(function (response) {
+        _this.keeps = response.data;
+      });
+    }
+  }
 });
 
 /***/ }),

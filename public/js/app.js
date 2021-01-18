@@ -50171,6 +50171,10 @@ new Vue({
   data: {
     keeps: [],
     newKeep: '',
+    fillKeep: {
+      id: '',
+      keep: ''
+    },
     errors: []
   },
   methods: {
@@ -50179,24 +50183,12 @@ new Vue({
 
       var urlKeeps = '/tasks';
       axios.get(urlKeeps).then(function (response) {
+        //Cargar la variable keeps con todas las tareas
         _this.keeps = response.data;
       });
     },
-    deleteKeep: function deleteKeep(keep) {
-      var _this2 = this;
-
-      var urlKeeps = '/tasks/' + keep.id; //Elimina el registro
-
-      axios["delete"](urlKeeps).then(function (response) {
-        //Lista nuevamente las tareas
-        _this2.getKeeps(); //Mensaje de feedback
-
-
-        toastr.success('Tarea #' + keep.id + ' eliminada correctamente');
-      });
-    },
     storeKeep: function storeKeep() {
-      var _this3 = this;
+      var _this2 = this;
 
       var urlKeeps = '/tasks';
       axios.post(urlKeeps, {
@@ -50204,18 +50196,62 @@ new Vue({
 
       }).then(function (response) {
         //Listar nuevamente las tareas
-        _this3.getKeeps(); //Formatear las variables del formulario
+        _this2.getKeeps(); //Formatear las variables del formulario
 
 
-        _this3.newKeep = '';
-        _this3.errors = []; //Ocultar el modal con JQuery
+        _this2.newKeep = '';
+        _this2.errors = []; //Ocultar el modal con JQuery
 
         $('#create').modal('hide'); //Mensaje de feedback con el plugin JQuery toastr
 
-        toastr.success('Tarea creada correctamente, número: #' + response.data.id);
+        toastr.success("Tarea creada correctamente, n\xFAmero: #".concat(response.data.id));
       })["catch"](function (error) {
         //Controlar los errores
+        _this2.errors = error.response.data;
+      });
+    },
+    editKeep: function editKeep(keep) {
+      //Llena la variable fillKeep con la información del keep seleccionado
+      this.fillKeep.id = keep.id;
+      this.fillKeep.keep = keep.keep; //Muestra el modal manualmente usando JQuery
+
+      $('#edit').modal('show');
+    },
+    updateKeep: function updateKeep(id) {
+      var _this3 = this;
+
+      var urlKeeps = "/tasks/".concat(id); //Como se trata de un objeto simplemente se envía el atributo fillKeep
+
+      axios.put(urlKeeps, this.fillKeep).then(function (response) {
+        //Listar todas las tareas
+        _this3.getKeeps(); //Resetear las variables utilizadas
+
+
+        _this3.fillKeep = {
+          id: '',
+          keep: ''
+        };
+        _this3.errors = []; //Ocultar el modal de edición con JQuery
+
+        $('#edit').modal('hide'); //Mensaje de feedback con el plugin JQuery toastr
+
+        toastr.success("Tarea #".concat(response.data.id, " actualizada correctamente"));
+      })["catch"](function (error) {
+        //Tratamiento de errores
         _this3.errors = error.response.data;
+      });
+    },
+    deleteKeep: function deleteKeep(keep) {
+      var _this4 = this;
+
+      var urlKeeps = "/tasks/".concat(keep.id); //Elimina el registro
+
+      axios["delete"](urlKeeps).then(function (response) {
+        //Lista nuevamente las tareas
+        _this4.getKeeps(); //Mensaje de feedback
+
+
+        toastr.success("Tarea #".concat(keep.id, " eliminada correctamente"));
       });
     }
   }

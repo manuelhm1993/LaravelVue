@@ -35,7 +35,10 @@
                                 <td width="10px">@{{ keep.id }}</td>
                                 <td>@{{ keep.keep }}</td>
                                 <td width="10px">
-                                    <a href="#" class="btn btn-warning btn-sm">Editar</a>
+                                    {{-- El modal se mostrará manualmente para pasar el keep por parámetro --}}
+                                    <a href="#" class="btn btn-warning btn-sm" v-on:click.prevent="editKeep(keep)">
+                                        Editar
+                                    </a>
                                 </td>
                                 <td width="10px">
                                     {{-- 
@@ -52,6 +55,7 @@
             </div>
 
             @include('tasks.create')
+            @include('tasks.edit')
         </div>
 
         <div class="col-5">

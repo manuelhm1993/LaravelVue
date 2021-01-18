@@ -17,7 +17,15 @@ new Vue({
             });
         },
         deleteKeep: function (keep) {
-            alert('Eliminar tarea: #' + keep.id);
+            let respuesta = confirm('¿Desea eliminar la tarea #' + keep.id + '?');
+
+            if(respuesta) {
+                let urlKeeps = '/tasks/' + keep.id;
+
+                axios.delete(urlKeeps).then(response => {
+                    this.getKeeps();
+                });
+            }
         }
     }
 });

@@ -49683,7 +49683,16 @@ new Vue({
       });
     },
     deleteKeep: function deleteKeep(keep) {
-      alert('Eliminar tarea: #' + keep.id);
+      var _this2 = this;
+
+      var respuesta = confirm('¿Desea eliminar la tarea #' + keep.id + '?');
+
+      if (respuesta) {
+        var urlKeeps = '/tasks/' + keep.id;
+        axios["delete"](urlKeeps).then(function (response) {
+          _this2.getKeeps();
+        });
+      }
     }
   }
 });

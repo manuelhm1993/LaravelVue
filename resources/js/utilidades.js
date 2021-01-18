@@ -18,6 +18,15 @@ new Vue({
         fillKeep: { id: '', keep: '' },
         errors: []
     },
+    computed: {
+        isActived: function () {
+            //Retorna la página actual para activarla
+            return this.pagination.currentPage;
+        },
+        pagesNumber: function () {
+
+        }
+    },
     methods: {
         getKeeps: function () {
             let urlKeeps = '/tasks';

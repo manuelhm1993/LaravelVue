@@ -15,11 +15,11 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::orderBy('id', 'desc')->paginate(2);
+        $tasks = Task::orderBy('id', 'desc')->paginate(3);
 
         //Un array que contiene los registros y los datos de la paginación
         return [
-            'paginate' => [
+            'pagination' => [
                 'total'       => $tasks->total(),//Número de páginas
                 'currentPage' => $tasks->currentPage(),//Página actual
                 'perPage'     => $tasks->perPage(),//Por página

@@ -50170,6 +50170,14 @@ new Vue({
   },
   data: {
     keeps: [],
+    pagination: {
+      total: 0,
+      currentPage: 0,
+      perPage: 0,
+      lastPage: 0,
+      from: 0,
+      to: 0
+    },
     newKeep: '',
     fillKeep: {
       id: '',
@@ -50184,7 +50192,9 @@ new Vue({
       var urlKeeps = '/tasks';
       axios.get(urlKeeps).then(function (response) {
         //Cargar la variable keeps con todas las tareas
-        _this.keeps = response.data.tasks.data;
+        _this.keeps = response.data.tasks.data; //Cargar el objeto pagination con todos los controles
+
+        _this.pagination = response.data.pagination;
       });
     },
     storeKeep: function storeKeep() {

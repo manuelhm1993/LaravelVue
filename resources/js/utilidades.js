@@ -6,6 +6,14 @@ new Vue({
     },
     data: {
         keeps: [],
+        pagination: {
+            total: 0,
+            currentPage: 0,
+            perPage: 0,
+            lastPage: 0,
+            from: 0,
+            to: 0
+        },
         newKeep: '',
         fillKeep: { id: '', keep: '' },
         errors: []
@@ -17,6 +25,9 @@ new Vue({
             axios.get(urlKeeps).then(response => {
                 //Cargar la variable keeps con todas las tareas
                 this.keeps = response.data.tasks.data;
+
+                //Cargar el objeto pagination con todos los controles no se coloca data por ser un objeto
+                this.pagination = response.data.pagination;
             });
         },
         storeKeep: function () {

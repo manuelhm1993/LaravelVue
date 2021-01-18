@@ -15,6 +15,9 @@ new Vue({
             axios.get(urlKeeps).then(response => {
                 this.keeps = response.data;
             });
+        },
+        deleteKeep: function (keep) {
+            alert('Eliminar tarea: #' + keep.id);
         }
     }
 });

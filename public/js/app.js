@@ -49681,6 +49681,9 @@ new Vue({
       axios.get(urlKeeps).then(function (response) {
         _this.keeps = response.data;
       });
+    },
+    deleteKeep: function deleteKeep(keep) {
+      alert('Eliminar tarea: #' + keep.id);
     }
   }
 });

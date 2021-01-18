@@ -17,5 +17,5 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
-//Crear todas las rutas excepto la de show ya que no se usará
-Route::resource('tasks', 'TaskController')->except(['show']);
+//Crear todas las rutas excepto: show, create y edit que serán excluidas
+Route::resource('tasks', 'TaskController')->except(['show', 'create', 'edit']);

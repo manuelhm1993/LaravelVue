@@ -12,7 +12,10 @@
         <div class="col-7">
             <div class="row">
                 <div class="col-12">
-                    <a href="#" class="btn btn-primary float-right">Nueva tarea</a>
+                    {{-- Dispara el modal --}}
+                    <a href="#" class="btn btn-primary float-right" data-toggle="modal" data-target="#create">
+                        Nueva tarea
+                    </a>
                 </div>
             </div>
 
@@ -47,6 +50,8 @@
                     </table>
                 </div>
             </div>
+
+            @include('tasks.create')
         </div>
 
         <div class="col-5">

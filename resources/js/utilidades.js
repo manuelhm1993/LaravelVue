@@ -16,7 +16,7 @@ new Vue({
 
             axios.get(urlKeeps).then(response => {
                 //Cargar la variable keeps con todas las tareas
-                this.keeps = response.data;
+                this.keeps = response.data.tasks.data;
             });
         },
         storeKeep: function () {

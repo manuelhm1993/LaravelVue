@@ -50184,7 +50184,7 @@ new Vue({
       var urlKeeps = '/tasks';
       axios.get(urlKeeps).then(function (response) {
         //Cargar la variable keeps con todas las tareas
-        _this.keeps = response.data;
+        _this.keeps = response.data.tasks.data;
       });
     },
     storeKeep: function storeKeep() {

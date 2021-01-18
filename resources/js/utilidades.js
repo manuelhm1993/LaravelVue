@@ -24,7 +24,34 @@ new Vue({
             return this.pagination.currentPage;
         },
         pagesNumber: function () {
+            //Si no existe un hasta se retorna un array vacío
+            if(!this.pagination.to) {
+                return [];
+            }
 
+            //Controlar el desde
+            let from = this.pagination.currentPage - 2;//TODO offset
+
+            if(from < 1) {
+                from = 1;
+            }
+
+            //Controlar el hasta
+            let to = from + (2 * 2);//TODO 
+
+            if(to >= this.pagination.lastPage) {
+                to >= this.pagination.lastPage;
+            }
+
+            //Controlar la numeración
+            let pagesArray = [];
+
+            while(from <= to) {
+                pagesArray.push(from);
+                from++;
+            }
+
+            return pagesArray;
         }
     },
     methods: {

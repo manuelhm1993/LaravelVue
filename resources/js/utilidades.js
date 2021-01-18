@@ -66,7 +66,7 @@ new Vue({
                 $('#edit').modal('hide');
 
                 //Mensaje de feedback con el plugin JQuery toastr
-                toastr.success(`Tarea #${id} actualizada correctamente`);
+                toastr.success(`Tarea #${response.data.id} actualizada correctamente`);
             }).catch(error => {
                 //Tratamiento de errores
                 this.errors = error.response.data;

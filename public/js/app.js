@@ -50235,7 +50235,7 @@ new Vue({
 
         $('#edit').modal('hide'); //Mensaje de feedback con el plugin JQuery toastr
 
-        toastr.success("Tarea #".concat(id, " actualizada correctamente"));
+        toastr.success("Tarea #".concat(response.data.id, " actualizada correctamente"));
       })["catch"](function (error) {
         //Tratamiento de errores
         _this3.errors = error.response.data;

@@ -55,8 +55,8 @@ new Vue({
         }
     },
     methods: {
-        getKeeps: function () {
-            let urlKeeps = '/tasks';
+        getKeeps: function (page) {
+            let urlKeeps = `/tasks?page=${page}`;
 
             axios.get(urlKeeps).then(response => {
                 //Cargar la variable keeps con todas las tareas
@@ -130,6 +130,10 @@ new Vue({
                 //Mensaje de feedback
                 toastr.success(`Tarea #${keep.id} eliminada correctamente`);
             });
+        },
+        changePage: function (page) {
+            this.pagination.currentPage = page;//Cambiar la página actual
+            this.getKeeps(page);//Página solicitada
         }
     }
 });

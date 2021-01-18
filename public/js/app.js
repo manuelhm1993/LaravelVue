@@ -50185,14 +50185,50 @@ new Vue({
     },
     errors: []
   },
+  computed: {
+    isActived: function isActived() {
+      //Retorna la página actual para activarla
+      return this.pagination.currentPage;
+    },
+    pagesNumber: function pagesNumber() {
+      //Si no existe un hasta se retorna un array vacío
+      if (!this.pagination.to) {
+        return [];
+      } //Controlar el desde
+
+
+      var from = this.pagination.currentPage - 2; //TODO offset
+
+      if (from < 1) {
+        from = 1;
+      } //Controlar el hasta
+
+
+      var to = from + 2 * 2; //TODO 
+
+      if (to >= this.pagination.lastPage) {
+        to >= this.pagination.lastPage;
+      } //Controlar la numeración
+
+
+      var pagesArray = [];
+
+      while (from <= to) {
+        pagesArray.push(from);
+        from++;
+      }
+
+      return pagesArray;
+    }
+  },
   methods: {
-    getKeeps: function getKeeps() {
+    getKeeps: function getKeeps(page) {
       var _this = this;
 
-      var urlKeeps = '/tasks';
+      var urlKeeps = "/tasks?page=".concat(page);
       axios.get(urlKeeps).then(function (response) {
         //Cargar la variable keeps con todas las tareas
-        _this.keeps = response.data.tasks.data; //Cargar el objeto pagination con todos los controles
+        _this.keeps = response.data.tasks.data; //Cargar el objeto pagination con todos los controles no se coloca data por ser un objeto
 
         _this.pagination = response.data.pagination;
       });
@@ -50263,6 +50299,11 @@ new Vue({
 
         toastr.success("Tarea #".concat(keep.id, " eliminada correctamente"));
       });
+    },
+    changePage: function changePage(page) {
+      this.pagination.currentPage = page; //Cambiar la página actual
+
+      this.getKeeps(page); //Página solicitada
     }
   }
 });

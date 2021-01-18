@@ -50169,7 +50169,9 @@ new Vue({
     this.getKeeps();
   },
   data: {
-    keeps: []
+    keeps: [],
+    newKeep: '',
+    errors: []
   },
   methods: {
     getKeeps: function getKeeps() {
@@ -50191,6 +50193,29 @@ new Vue({
 
 
         toastr.success('Tarea #' + keep.id + ' eliminada correctamente');
+      });
+    },
+    storeKeep: function storeKeep() {
+      var _this3 = this;
+
+      var urlKeeps = '/tasks';
+      axios.post(urlKeeps, {
+        keep: this.newKeep //Datos del formulario
+
+      }).then(function (response) {
+        //Listar nuevamente las tareas
+        _this3.getKeeps(); //Formatear las variables del formulario
+
+
+        _this3.newKeep = '';
+        _this3.errors = []; //Ocultar el modal con JQuery
+
+        $('#create').modal('hide'); //Mensaje de feedback con el plugin JQuery toastr
+
+        toastr.success('Tarea creada correctamente, número: #' + response.data.id);
+      })["catch"](function (error) {
+        //Controlar los errores
+        _this3.errors = error.response.data;
       });
     }
   }

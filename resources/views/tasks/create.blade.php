@@ -13,7 +13,7 @@
                 <span v-for="error in errors" v-text="error" class="text-danger"></span>
             </div>
             <div class="modal-footer">
-                <input type="submit" class="btn btn-primary" value="Crear">
+                <input type="button" class="btn btn-primary" value="Crear" v-on:click="storeKeep()">
             </div>
         </div>
     </div>

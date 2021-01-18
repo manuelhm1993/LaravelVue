@@ -35,7 +35,12 @@
                                     <a href="#" class="btn btn-warning btn-sm">Editar</a>
                                 </td>
                                 <td width="10px">
-                                    <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
+                                    {{-- 
+                                        1. Poner a la escucha del click al botón
+                                        2. Prevenir su comportamiento por defecto para que no recargue la página
+                                        3. Llamar al método deleteKeep pasando el keep de cada iteración
+                                    --}}
+                                    <a href="#" class="btn btn-danger btn-sm" v-on:click.prevent="deleteKeep(keep)">Eliminar</a>
                                 </td>
                             </tr>
                         </tbody>

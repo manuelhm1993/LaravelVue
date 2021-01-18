@@ -49681,6 +49681,18 @@ new Vue({
       axios.get(urlKeeps).then(function (response) {
         _this.keeps = response.data;
       });
+    },
+    deleteKeep: function deleteKeep(keep) {
+      var _this2 = this;
+
+      var respuesta = confirm('¿Desea eliminar la tarea #' + keep.id + '?');
+
+      if (respuesta) {
+        var urlKeeps = '/tasks/' + keep.id;
+        axios["delete"](urlKeeps).then(function (response) {
+          _this2.getKeeps();
+        });
+      }
     }
   }
 });

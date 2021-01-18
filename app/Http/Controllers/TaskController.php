@@ -32,7 +32,9 @@ class TaskController extends Controller
             'keep' => 'required'
         ]);
 
-        Task::create($request->all());
+        $task = Task::create($request->all());
+
+        return $task;
     }
 
     /**

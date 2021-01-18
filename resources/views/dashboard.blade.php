@@ -28,9 +28,9 @@
                         </thead>
         
                         <tbody>
-                            <tr>
-                                <td width="10px">1</td>
-                                <td>Tarea 1</td>
+                            <tr v-for="keep in keeps">
+                                <td width="10px">@{{ keep.id }}</td>
+                                <td>@{{ keep.keep }}</td>
                                 <td width="10px">
                                     <a href="#" class="btn btn-warning btn-sm">Editar</a>
                                 </td>

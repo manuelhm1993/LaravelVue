@@ -54,6 +54,32 @@
                 </div>
             </div>
 
+            <nav>
+                <ul class="pagination">
+                    {{-- Mostrar sólo si no es la primera página --}}
+                    <li class="page-item" v-if="pagination.currentPage > 1">
+                        {{-- Ir a la página anterior --}}
+                        <a class="page-link" href="#" @click.prevent="changePage(pagination.currentPage - 1)">
+                            Atrás
+                        </a>
+                    </li>
+                    
+                    <li class="page-item" v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '']">
+                        <a class="page-link" href="#" @click.prevent="changePage(page)">
+                            @{{ page }}
+                        </a>
+                    </li>
+                    
+                    {{-- Mostrar sólo si no es la última página --}}
+                    <li class="page-item" v-if="pagination.currentPage < pagination.lastPage">
+                        {{-- Ir a la página siguiente --}}
+                        <a class="page-link" href="#" @click.prevent="changePage(pagination.currentPage + 1)">
+                            Siguiente
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
             @include('tasks.create')
             @include('tasks.edit')
         </div>

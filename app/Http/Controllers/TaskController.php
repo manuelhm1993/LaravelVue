@@ -25,7 +25,7 @@ class TaskController extends Controller
                 'perPage'     => $tasks->perPage(),//Por página
                 'lastPage'    => $tasks->lastPage(),//Última página
                 'from'        => $tasks->firstItem(),//Desde
-                'to'          => $tasks->lastPage()//Hasta
+                'to'          => $tasks->lastItem()//Hasta
             ],
             'tasks' => $tasks
         ];

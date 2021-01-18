@@ -8,6 +8,9 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+//Se debe colocar el nombre de la variable para que sea accedida globalmente
+window.toastr = require('toastr');
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

@@ -50178,6 +50178,7 @@ new Vue({
       from: 0,
       to: 0
     },
+    offset: 3,
     newKeep: '',
     fillKeep: {
       id: '',
@@ -50197,17 +50198,17 @@ new Vue({
       } //Controlar el desde
 
 
-      var from = this.pagination.currentPage - 2; //TODO offset
+      var from = this.pagination.currentPage - this.offset;
 
       if (from < 1) {
         from = 1;
       } //Controlar el hasta
 
 
-      var to = from + 2 * 2; //TODO 
+      var to = from + this.offset * 2;
 
       if (to >= this.pagination.lastPage) {
-        to >= this.pagination.lastPage;
+        to = this.pagination.lastPage;
       } //Controlar la numeración
 
 
